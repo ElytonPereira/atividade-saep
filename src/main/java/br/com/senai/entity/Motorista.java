@@ -35,7 +35,7 @@ public class Motorista {
 	@EqualsAndHashCode.Include
 	private Integer id;
 	
-	@Size(max = 45, message = "O nome da motorista não deve conter mais de 45 caracteres")
+	@Size(min = 3, max = 45, message = "O nome da motorista deve conter entre 3 e 45 caracteres")
 	@NotBlank(message = "O nome do motorista é obrigatório")
 	@Column(name = "nome")
 	private String nome;

@@ -1,7 +1,6 @@
 package br.com.senai.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,8 +22,8 @@ public class MotoristaService {
 	private EntregaRepository entregaRepository;
 	
 	public Motorista salvar(@NotNull(message = "O motorista é obrigatório") Motorista motorista) {			
-		
-		return this.repository.save(motorista);				
+		Preconditions.checkNotNull(motorista, "O motorista não pode ser nulo");
+		return repository.save(motorista);				
 	}
 	/*
 	public Page<Motorista> listarPor(@NotNull(message = "O id da transportadora é obrigatório para listar o motorista") Integer id){

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import br.com.senai.entity.Usuario;
@@ -20,6 +21,7 @@ import br.com.senai.service.UsuarioService;
 
 
 @Component
+@Lazy
 public class ViewLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +32,11 @@ public class ViewLogin extends JFrame {
 	
 	@Autowired
 	private UsuarioService service;
-
+	
+	@Autowired
+	private ViewPrincipal viewPrincipal;
+	
+	
 	
 	public ViewLogin() {
 		setResizable(false);
@@ -75,12 +81,18 @@ public class ViewLogin extends JFrame {
 					
 					if (usuarioEncontrado != null) {
 						JOptionPane.showMessageDialog(null, "Bem vindo: " + usuarioEncontrado.getNome());
+						
+						
+						viewPrincipal.pegarTransportadora(usuarioEncontrado.getTransportadora());
+						viewPrincipal.setVisible(true);
+						dispose();
+						
 					}else {
 						JOptionPane.showMessageDialog(null, "Usuario nao encontrado ou informacoes incorretas");
 					
 					}
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Usuario nao encontrado ou informacoes incorretas");
+					e2.printStackTrace();
 				}
 			}
 		});
