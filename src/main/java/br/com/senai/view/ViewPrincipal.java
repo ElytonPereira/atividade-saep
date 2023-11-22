@@ -3,8 +3,10 @@ package br.com.senai.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Component;
 import com.google.common.base.Preconditions;
 
 import br.com.senai.entity.Transportadora;
-import javax.swing.JScrollPane;
 
 @Component
 @Lazy
@@ -27,7 +28,10 @@ public class ViewPrincipal extends JFrame {
 	private  String nomeTransportadora; 	
 	
 	@Autowired
-	private ViewCadastroMotorista viewCadastroMotorista;
+	private ViewMotoristas viewMotorista;
+	
+	@Autowired
+	private ViewEntregas viewEntregas;
 	
 	@Autowired
 	private Transportadora transportadora;
@@ -56,21 +60,34 @@ public class ViewPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		System.out.println(this.nomeTransportadora);
 		
-		setContentPane(contentPane);
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 		
-		JButton btnCadastrarMotorista = new JButton("Cadastrar Motorista");
-		btnCadastrarMotorista.setBounds(10, 205, 157, 23);
-		btnCadastrarMotorista.addActionListener(new ActionListener() {
+		JMenu mnNewMenu = new JMenu("Cadastros");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem btnMotorista = new JMenuItem("Motorista");
+		btnMotorista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				viewCadastroMotorista.pegarTransportadora(transportadora);
-				viewCadastroMotorista.setVisible(true);
+				viewMotorista.pegarTransportadora(transportadora);
+				viewMotorista.setVisible(true);
 				dispose();
-				
 			}
 		});
+		mnNewMenu.add(btnMotorista);
+		
+		JMenuItem btnEntrega = new JMenuItem("Entrega");
+		btnEntrega.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				viewEntregas.pegarTransportadora(transportadora);
+				viewEntregas.setVisible(true);
+				dispose();
+			}
+		});
+		mnNewMenu.add(btnEntrega);
+		
+		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.add(btnCadastrarMotorista);
 		
 	}
 }

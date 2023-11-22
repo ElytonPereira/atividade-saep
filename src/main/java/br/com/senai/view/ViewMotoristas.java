@@ -18,20 +18,18 @@ import br.com.senai.entity.Transportadora;
 
 @Component
 @Lazy
-public class ViewEntregas extends JFrame {
+public class ViewMotoristas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private JPanel contentPane;	
 
 	private  String nomeTransportadora; 	
 	
 	@Autowired
-	private ViewCadastroEntregas viewCadastroEntregas;
+	private ViewCadastroMotorista viewCadastroMotorista;
 	
 	@Autowired
-	private Transportadora transportadora;
-	
-	
+	private Transportadora transportadora;	
 
 
 	public void pegarTransportadora(Transportadora transportadora) {
@@ -42,29 +40,38 @@ public class ViewEntregas extends JFrame {
 		
 		
 	}
+
+
+
+	public ViewMotoristas() {
+		
 	
-	public ViewEntregas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		System.out.println(this.nomeTransportadora);
 		
-		JButton btnCadastroEntregas = new JButton("Cadastrar Entregas");
-		btnCadastroEntregas.addActionListener(new ActionListener() {
+		setContentPane(contentPane);
+		
+		JButton btnCadastrarMotorista = new JButton("Cadastrar Motorista");
+		btnCadastrarMotorista.setBounds(10, 205, 157, 23);
+		btnCadastrarMotorista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				viewCadastroEntregas.pegarTransportadora(transportadora);
-				viewCadastroEntregas.setVisible(true);
+				
+				viewCadastroMotorista.pegarTransportadora(transportadora);
+				viewCadastroMotorista.setVisible(true);
 				dispose();
+				
 			}
 		});
-		btnCadastroEntregas.setBounds(10, 227, 168, 23);
-		contentPane.add(btnCadastroEntregas);
+		contentPane.setLayout(null);
+		contentPane.add(btnCadastrarMotorista);
 		
 		JButton btnSair = new JButton("Logout");
 		btnSair.setBounds(345, 0, 89, 23);
 		contentPane.add(btnSair);
+		
 	}
 }

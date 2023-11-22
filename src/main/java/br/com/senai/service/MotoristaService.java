@@ -1,6 +1,9 @@
 package br.com.senai.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -25,11 +28,11 @@ public class MotoristaService {
 		Preconditions.checkNotNull(motorista, "O motorista não pode ser nulo");
 		return repository.save(motorista);				
 	}
-	/*
-	public Page<Motorista> listarPor(@NotNull(message = "O id da transportadora é obrigatório para listar o motorista") Integer id){
+	
+	public List<Motorista> listarPor(@NotNull(message = "O id da transportadora é obrigatório para listar o motorista") Integer id){
 		
 		return repository.listarPor(id);
-	}*/
+	}
 	
 	public Motorista excluirPor(Integer id) {
 		Motorista motoristaEncontrado = repository.buscarPor(id);

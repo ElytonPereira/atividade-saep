@@ -1,7 +1,5 @@
 package br.com.senai.entity;
 
-import org.springframework.stereotype.Component;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +22,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Component
 @Table(name = "motoristas")
 @Entity(name = "Motorista")
 public class Motorista {

@@ -92,7 +92,7 @@ public class ViewLogin extends JFrame {
 					
 					}
 				} catch (Exception e2) {
-					e2.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Usuario nao encontrado ou informacoes incorretas");
 				}
 			}
 		});

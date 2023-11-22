@@ -107,5 +107,9 @@ public class ViewCadastroMotorista extends JFrame {
 		JLabel txtTitulo = new JLabel("CADASTRO DE MOTORISTA");
 		txtTitulo.setBounds(131, 11, 172, 14);
 		contentPane.add(txtTitulo);
+		
+		JButton btnSair = new JButton("Logout");
+		btnSair.setBounds(345, 0, 89, 23);
+		contentPane.add(btnSair);
 	}
 }
