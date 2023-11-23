@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import br.com.senai.entity.Usuario;
 import br.com.senai.service.UsuarioService;
 
-
 @Component
 @Lazy
 public class ViewLogin extends JFrame {
@@ -35,9 +34,7 @@ public class ViewLogin extends JFrame {
 	
 	@Autowired
 	private ViewPrincipal viewPrincipal;
-	
-	
-	
+		
 	public ViewLogin() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,6 +44,7 @@ public class ViewLogin extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		edtNome = new JTextField();
 		edtNome.setBounds(165, 81, 92, 20);

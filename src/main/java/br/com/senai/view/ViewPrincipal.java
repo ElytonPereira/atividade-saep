@@ -36,24 +36,17 @@ public class ViewPrincipal extends JFrame {
 	@Autowired
 	private Transportadora transportadora;
 	
-	
-
-
 	public void pegarTransportadora(Transportadora transportadora) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
 		setTitle(nomeTransportadora);
 		
-		
 	}
 
-
-
 	public ViewPrincipal() {
-		
-	
-		
+		setResizable(false);
+			
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -88,6 +81,7 @@ public class ViewPrincipal extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 	}
 }

@@ -25,32 +25,33 @@ public class ViewEntregas extends JFrame {
 
 	private  String nomeTransportadora; 	
 	
-	@Autowired
+	@Autowired @Lazy
 	private ViewCadastroEntregas viewCadastroEntregas;
-	
+		
 	@Autowired
 	private Transportadora transportadora;
 	
-	
-
+	@Autowired
+	private ViewLogin viewLogin;
 
 	public void pegarTransportadora(Transportadora transportadora) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
 		setTitle(nomeTransportadora);
-		
-		
+				
 	}
 	
 	public ViewEntregas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JButton btnCadastroEntregas = new JButton("Cadastrar Entregas");
 		btnCadastroEntregas.addActionListener(new ActionListener() {
@@ -64,7 +65,17 @@ public class ViewEntregas extends JFrame {
 		contentPane.add(btnCadastroEntregas);
 		
 		JButton btnSair = new JButton("Logout");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				viewLogin.setVisible(true);
+				dispose();
+			}
+		});
 		btnSair.setBounds(345, 0, 89, 23);
 		contentPane.add(btnSair);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 37, 414, 158);
+		contentPane.add(panel);
 	}
 }

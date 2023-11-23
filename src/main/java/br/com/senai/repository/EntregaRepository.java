@@ -13,6 +13,12 @@ public interface EntregaRepository extends JpaRepository<Entrega, Integer>{
 	//public void listarPor(Integer idMotorista);
 	
 	@Query(value = 
+			"SELECT e "
+			+ "FROM Entrega e "
+			+ "WHERE e.id = :id ")
+	public Entrega buscarPor(Integer id);
+	
+	@Query(value = 
 			"SELECT Count(e) "
 			+ "FROM Entrega e "
 			+ "WHERE e.motorista.id = :idDoMotorista ")

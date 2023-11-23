@@ -31,27 +31,24 @@ public class ViewMotoristas extends JFrame {
 	@Autowired
 	private Transportadora transportadora;	
 
-
+	@Autowired
+	private ViewLogin viewLogin;
+	
 	public void pegarTransportadora(Transportadora transportadora) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
-		setTitle(nomeTransportadora);
-		
+		setTitle(nomeTransportadora);		
 		
 	}
 
-
-
 	public ViewMotoristas() {
-		
-	
+		setResizable(false);	
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		System.out.println(this.nomeTransportadora);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));		
 		
 		setContentPane(contentPane);
 		
@@ -67,9 +64,16 @@ public class ViewMotoristas extends JFrame {
 			}
 		});
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		contentPane.add(btnCadastrarMotorista);
 		
 		JButton btnSair = new JButton("Logout");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				viewLogin.setVisible(true);
+				dispose();
+			}
+		});
 		btnSair.setBounds(345, 0, 89, 23);
 		contentPane.add(btnSair);
 		
