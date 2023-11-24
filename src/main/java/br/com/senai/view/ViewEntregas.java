@@ -57,7 +57,7 @@ public class ViewEntregas extends JFrame {
 		btnCadastroEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				viewCadastroEntregas.pegarTransportadora(transportadora);
-				viewCadastroEntregas.setVisible(true);
+				//viewCadastroEntregas.setVisible(true);
 				dispose();
 			}
 		});

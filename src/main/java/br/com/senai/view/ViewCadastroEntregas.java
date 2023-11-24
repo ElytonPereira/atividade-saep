@@ -34,7 +34,7 @@ public class ViewCadastroEntregas extends JFrame {
 	private JComboBox<Motorista> cbMotoristas;
 	private  String nomeTransportadora; 	
 		
-	@Autowired
+	
 	private Transportadora transportadora;
 	
 	@Autowired
@@ -50,13 +50,14 @@ public class ViewCadastroEntregas extends JFrame {
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.idTransportadora = transportadora.getId();
 		this.transportadora = transportadora;
-		setTitle(nomeTransportadora);		
+		setTitle(nomeTransportadora);	
+		this.setVisible(true);
 		
 	}	
 	
 	public void carregarCombo() {
 		
-		List<Motorista> motoristas = motoristaService.listarPor(idTransportadora);
+		List<Motorista> motoristas = motoristaService.listarPor(transportadora.getId());
 		for (Motorista motorista : motoristas) {
 			cbMotoristas.addItem(motorista);
 		}
@@ -64,7 +65,7 @@ public class ViewCadastroEntregas extends JFrame {
 	
 	public ViewCadastroEntregas() {
 		setResizable(false);
-		System.out.println("Service motorista entrega: " + motoristaService);
+		//System.out.println("Service motorista entrega: " + motoristaService + " - idTransportadora: " + transportadora.getId());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -133,7 +134,8 @@ public class ViewCadastroEntregas extends JFrame {
 		btnSair.setBounds(345, 0, 89, 23);
 		contentPane.add(btnSair);
 		
-		this.carregarCombo();
+		//this.carregarCombo();
+		this.pegarTransportadora(transportadora);
 		
 	}
 }
