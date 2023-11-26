@@ -30,7 +30,7 @@ public class ViewLogin extends JFrame {
 	private JButton btnEntrar;
 	
 	@Autowired
-	private UsuarioService service;
+	private UsuarioService service;	
 	
 	@Autowired
 	private ViewPrincipal viewPrincipal;
@@ -79,10 +79,7 @@ public class ViewLogin extends JFrame {
 					
 					if (usuarioEncontrado != null) {
 						JOptionPane.showMessageDialog(null, "Bem vindo: " + usuarioEncontrado.getNome());
-						
-						
-						viewPrincipal.pegarTransportadora(usuarioEncontrado.getTransportadora());
-						viewPrincipal.setVisible(true);
+						viewPrincipal.pegarTransportadora(usuarioEncontrado.getTransportadora());						
 						dispose();
 						
 					}else {

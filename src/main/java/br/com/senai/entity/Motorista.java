@@ -46,5 +46,12 @@ public class Motorista {
 	@JoinColumn(name = "id_transportadora")
 	@NotNull(message = "A transportadora é obrigatória")
 	private Transportadora transportadora;
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
+	
 	
 }

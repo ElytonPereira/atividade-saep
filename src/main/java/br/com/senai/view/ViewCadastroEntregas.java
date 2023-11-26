@@ -22,7 +22,8 @@ import com.google.common.base.Preconditions;
 import br.com.senai.entity.Entrega;
 import br.com.senai.entity.Motorista;
 import br.com.senai.entity.Transportadora;
-import br.com.senai.service.MotoristaService;
+import br.com.senai.service.EntregaService;
+import jakarta.annotation.PostConstruct;
 
 @Component
 @Lazy
@@ -34,38 +35,41 @@ public class ViewCadastroEntregas extends JFrame {
 	private JComboBox<Motorista> cbMotoristas;
 	private  String nomeTransportadora; 	
 		
-	
-	private Transportadora transportadora;
+	@Autowired
+	private EntregaService entregaService;
 	
 	@Autowired
-	private MotoristaService motoristaService;
+	private ViewLogin viewLogin;	
 	
-	@Autowired
-	private ViewLogin viewLogin;
+	private List<Motorista> motoristas;
 	
-	private Integer idTransportadora;
-	
-	public void pegarTransportadora(Transportadora transportadora) {
+	public void pegarTransportadora(Transportadora transportadora, List<Motorista> motoristas) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
-		this.idTransportadora = transportadora.getId();
-		this.transportadora = transportadora;
+		this.motoristas = motoristas;
+		this.carregarCombo();
 		setTitle(nomeTransportadora);	
 		this.setVisible(true);
 		
 	}	
 	
+	@PostConstruct
 	public void carregarCombo() {
 		
-		List<Motorista> motoristas = motoristaService.listarPor(transportadora.getId());
-		for (Motorista motorista : motoristas) {
-			cbMotoristas.addItem(motorista);
+		if (motoristas != null) {
+			
+			for (Motorista motorista : motoristas) {
+				cbMotoristas.addItem(motorista);
+			}
 		}
 	}
 	
+	public void limparCombo() {
+	    cbMotoristas.removeAllItems();
+	}
+	
 	public ViewCadastroEntregas() {
-		setResizable(false);
-		//System.out.println("Service motorista entrega: " + motoristaService + " - idTransportadora: " + transportadora.getId());
+		setResizable(false);		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,7 +83,8 @@ public class ViewCadastroEntregas extends JFrame {
 		txtMotoristas.setBounds(10, 62, 68, 14);
 		contentPane.add(txtMotoristas);
 		
-		JComboBox cbMotoristas = new JComboBox<Motorista>();
+		cbMotoristas = new JComboBox<Motorista>();
+
 		cbMotoristas.setBounds(78, 58, 277, 22);
 		contentPane.add(cbMotoristas);
 		
@@ -107,13 +112,12 @@ public class ViewCadastroEntregas extends JFrame {
 						entrega.setDescricao(descricao);
 						entrega.setMotorista(motorista);
 						
-						motoristaService.salvar(motorista);
+						entregaService.salvar(entrega);
 						
 						JOptionPane.showInternalMessageDialog(null, "Entrega salva com sucesso!");
 						edtDescricao.setText("");
 						
-					}
-					
+					}					
 					
 				} catch (Exception e2) {
 					JOptionPane.showInternalMessageDialog(null, "Erro ao tentar salvar a Entrega");
@@ -128,14 +132,12 @@ public class ViewCadastroEntregas extends JFrame {
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				viewLogin.setVisible(true);
+				limparCombo();
 				dispose();
 			}
 		});
 		btnSair.setBounds(345, 0, 89, 23);
 		contentPane.add(btnSair);
-		
-		//this.carregarCombo();
-		this.pegarTransportadora(transportadora);
 		
 	}
 }

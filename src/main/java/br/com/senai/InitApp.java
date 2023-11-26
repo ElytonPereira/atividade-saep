@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 
 import br.com.senai.view.ViewLogin;
 
-
-
 @SpringBootApplication
 public class InitApp {	
 	
@@ -24,9 +22,7 @@ public class InitApp {
 	
 	@Autowired
 	ViewLogin telaLogin;
-	
-	
-	
+		
 	@Bean
 	public CommandLineRunner commandLineRuner(ApplicationContext ctx) {
 		return args -> {
@@ -34,7 +30,6 @@ public class InitApp {
 			usuarioEncontrado = service.buscarUsuarioPor("adm", "1234");
 			*/
 			EventQueue.invokeLater(new Runnable() {
-				
 				
 				@Override
 				public void run() {
@@ -45,8 +40,7 @@ public class InitApp {
 						
 					} catch (Exception e) {
 						e.printStackTrace();
-					}
-					
+					}					
 				}
 			});
 			/*
@@ -66,5 +60,4 @@ public class InitApp {
 			System.out.println("Subiu saep");
 		};
 	}
-
 }

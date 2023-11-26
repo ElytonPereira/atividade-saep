@@ -2,6 +2,8 @@ package br.com.senai.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.base.Preconditions;
 
+import br.com.senai.entity.Motorista;
 import br.com.senai.entity.Transportadora;
+import br.com.senai.service.MotoristaService;
 
 @Component
 @Lazy
@@ -36,12 +40,18 @@ public class ViewPrincipal extends JFrame {
 	@Autowired
 	private Transportadora transportadora;
 	
+	@Autowired
+	private MotoristaService motoristaService;
+	
+	private List<Motorista> motoristas = new ArrayList<Motorista>();
+	
 	public void pegarTransportadora(Transportadora transportadora) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
 		setTitle(nomeTransportadora);
-		
+		motoristas = null;
+		setVisible(true);
 	}
 
 	public ViewPrincipal() {
@@ -62,8 +72,7 @@ public class ViewPrincipal extends JFrame {
 		JMenuItem btnMotorista = new JMenuItem("Motorista");
 		btnMotorista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				viewMotorista.pegarTransportadora(transportadora);
-				viewMotorista.setVisible(true);
+				viewMotorista.pegarTransportadora(transportadora);				
 				dispose();
 			}
 		});
@@ -72,8 +81,9 @@ public class ViewPrincipal extends JFrame {
 		JMenuItem btnEntrega = new JMenuItem("Entrega");
 		btnEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				viewEntregas.pegarTransportadora(transportadora);
-				viewEntregas.setVisible(true);
+				motoristas = motoristaService.listarPor(transportadora.getId());
+				System.out.println(motoristas);
+				viewEntregas.pegarTransportadora(transportadora, motoristas);
 				dispose();
 			}
 		});

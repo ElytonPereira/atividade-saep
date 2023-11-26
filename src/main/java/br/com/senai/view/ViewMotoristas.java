@@ -39,6 +39,7 @@ public class ViewMotoristas extends JFrame {
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
 		setTitle(nomeTransportadora);		
+		setVisible(true);
 		
 	}
 

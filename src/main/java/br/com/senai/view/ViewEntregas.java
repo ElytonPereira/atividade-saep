@@ -2,6 +2,7 @@ package br.com.senai.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.base.Preconditions;
 
+import br.com.senai.entity.Motorista;
 import br.com.senai.entity.Transportadora;
 
 @Component
@@ -33,13 +35,16 @@ public class ViewEntregas extends JFrame {
 	
 	@Autowired
 	private ViewLogin viewLogin;
+	
+	private List<Motorista> motoristas;
 
-	public void pegarTransportadora(Transportadora transportadora) {
+	public void pegarTransportadora(Transportadora transportadora, List<Motorista> motoristas) {
 		Preconditions.checkNotNull(transportadora, "A transportadora não pode ser nula");
 		this.nomeTransportadora = transportadora.getNome().toUpperCase();
 		this.transportadora = transportadora;
+		this.motoristas = motoristas;
 		setTitle(nomeTransportadora);
-				
+		this.setVisible(true);
 	}
 	
 	public ViewEntregas() {
@@ -52,11 +57,12 @@ public class ViewEntregas extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
+		System.out.println("os motoristas chegaram aqui? " + motoristas);
 		JButton btnCadastroEntregas = new JButton("Cadastrar Entregas");
 		btnCadastroEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				viewCadastroEntregas.pegarTransportadora(transportadora);
+				
+				viewCadastroEntregas.pegarTransportadora(transportadora, motoristas);
 				//viewCadastroEntregas.setVisible(true);
 				dispose();
 			}
