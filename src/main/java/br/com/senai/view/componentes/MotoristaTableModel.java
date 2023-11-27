@@ -63,5 +63,19 @@ private static final long serialVersionUID = 1L;
 	public Motorista getPor(int rowIndex) {
 		return motoristas.get(rowIndex);
 	}	
+	
+	public void removerPor(int rowIndex) {
+		
+		this.motoristas.remove(rowIndex);
+		
+	}
+	
+	public boolean isVazio() {
+		return motoristas.isEmpty();
+	}
+	
+	public boolean isLinhaInvalida(int id) {
+		return id >= motoristas.size();
+	}
 
 }

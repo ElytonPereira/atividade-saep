@@ -26,16 +26,13 @@ public class InitApp {
 	@Bean
 	public CommandLineRunner commandLineRuner(ApplicationContext ctx) {
 		return args -> {
-			/*Usuario usuarioEncontrado = new Usuario();
-			usuarioEncontrado = service.buscarUsuarioPor("adm", "1234");
-			*/
+
 			EventQueue.invokeLater(new Runnable() {
 				
 				@Override
 				public void run() {
 					try {
-						/*List<Motorista> motoristas = service.listarPor(1);
-						System.out.println(motoristas);*/
+
 						telaLogin.setVisible(true);
 						
 					} catch (Exception e) {
@@ -43,20 +40,7 @@ public class InitApp {
 					}					
 				}
 			});
-			/*
-			transportadora = usuarioEncontrado.getTransportadora();
 			
-			
-			motorista.setNome("elyton");
-			motorista.setCnh(12345678);
-			motorista.setTransportadora(transportadora);
-			
-			motoristaService.salvar(motorista);
-			/*
-			motoristaService.excluirPor(2);
-			*/
-			
-			//System.out.println(usuarioEncontrado.getNome() + " - " + usuarioEncontrado.getTransportadora());
 			System.out.println("Subiu saep");
 		};
 	}

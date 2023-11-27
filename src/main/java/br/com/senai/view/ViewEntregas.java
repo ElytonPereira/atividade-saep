@@ -6,7 +6,12 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +24,7 @@ import br.com.senai.entity.Entrega;
 import br.com.senai.entity.Motorista;
 import br.com.senai.entity.Transportadora;
 import br.com.senai.service.EntregaService;
-import br.com.senai.service.MotoristaService;
 import br.com.senai.view.componentes.EntregaTableModel;
-import br.com.senai.view.componentes.MotoristaTableModel;
-
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 @Component
 @Lazy
@@ -80,14 +78,12 @@ public class ViewEntregas extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setLocationRelativeTo(null);
-		System.out.println("os motoristas chegaram aqui? " + motoristas);
+		setLocationRelativeTo(null);		
 		JButton btnCadastroEntregas = new JButton("Cadastrar Entregas");
 		btnCadastroEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				viewCadastroEntregas.pegarTransportadora(transportadora, motoristas);
-				//viewCadastroEntregas.setVisible(true);
 				dispose();
 			}
 		});
@@ -120,15 +116,13 @@ public class ViewEntregas extends JFrame {
 					Integer idMotorista = Integer.parseInt(edtIdMotorista.getText());
 					atualizarTabela(idMotorista);
 				} catch (Exception e2) {
-					// TODO: handle exception
-				}				
-				
+					JOptionPane.showMessageDialog(contentPane, e2.getMessage());
+				}								
 			}
 		});
 		btnListar.setBounds(192, 14, 89, 23);
 		contentPane.add(btnListar);
-		
-		
+				
 	}
 	
 	private void atualizarTabela(Integer idMotorista) {
@@ -138,6 +132,4 @@ public class ViewEntregas extends JFrame {
 		entregaTableModel = new EntregaTableModel(entregas);
         tableEntrega.setModel(entregaTableModel);
     }
-
-
 }
